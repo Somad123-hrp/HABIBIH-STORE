@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habibih Store - Layanan Marketplace Digital & Bot WhatsApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff4b5c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --warning: #ffc107;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 80px;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,138.7C960,139,1056,181,1152,186.7C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 75, 92, 0.4);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 75, 92, 0.6);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            gap: 10px;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: var(--gradient);
+            color: white;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-header {
+            background: var(--gradient);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .product-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .product-body {
+            padding: 20px;
+        }
+
+        .price-list {
+            list-style: none;
+        }
+
+        .price-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-list li:last-child {
+            border-bottom: none;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .highlight {
+            background: var(--accent);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+
+        .buy-button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .buy-button:hover {
+            background: #ff2e43;
+            transform: translateY(-2px);
+        }
+
+        /* Payment Section */
+        .payment {
+            background: #f0f4f8;
+        }
+
+        .payment-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .payment-method {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .payment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+        }
+
+        .dana {
+            background: #0acf83;
+        }
+
+        .gopay {
+            background: #00a3ff;
+        }
+
+        .bank {
+            background: #6a11cb;
+        }
+
+        .qris {
+            background: #ff4b5c;
+        }
+
+        .payment-details {
+            margin-top: 15px;
+        }
+
+        .payment-details p {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .payment-details strong {
+            color: var(--primary);
+        }
+
+        .payment-note {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .payment-note p {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .modal-instruction {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .whatsapp-button {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact h2::after {
+            background: white;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 12px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .payment-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .price-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .buy-button {
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>Habibih Store</span>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#hosting">Hosting</a></li>
+                    <li><a href="#social">Suntik Sosmed</a></li>
+                    <li><a href="#payment">Pembayaran</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Habibih Store</h1>
+            <p>Layanan Marketplace Digital & Bot WhatsApp Terlengkap dengan Harga Terjangkau</p>
+            <a href="#services" class="cta-button">Lihat Layanan <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Layanan Kami</h2>
+            </div>
+            
+            <div class="category-nav">
+                <button class="category-btn active" data-category="all">Semua</button>
+                <button class="category-btn" data-category="jpm">Jasa Push Member</button>
+                <button class="category-btn" data-category="bot">Sewa Bot</button>
+                <button class="category-btn" data-category="jadi-bot">Jadi Bot</button>
+                <button class="category-btn" data-category="nokos">NOKOS WhatsApp</button>
+                <button class="category-btn" data-category="murid">Murid</button>
+            </div>
+            
+            <div class="product-grid">
+                <!-- JPM Basic -->
+                <div class="product-card" data-category="jpm">
+                    <div class="product-header">
+                        <h3>JPM Basic</h3>
+                        <p>Jasa Push Member Basic</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>10 MEMBER</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM Basic - 10 Member" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>15 MEMBER</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM Basic - 15 Member" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>25 MEMBER</span>
+                                    <span class="price">Rp 8.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM Basic - 25 Member" data-price="8000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                                                <button class="buy-button" data-product="JPM Basic - 25 Member" data-price="8000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>50 MEMBER</span>
+                                    <span class="price">Rp 12.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM Basic - 50 Member" data-price="12000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>75 MEMBER</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM Basic - 75 Member" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>100 MEMBER</span>
+                                    <span class="price">Rp 25.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM Basic - 100 Member" data-price="25000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- JPM VIP -->
+                <div class="product-card visible" data-category="jpm">
+                    <div class="product-header">
+                        <h3>JPM VIP</h3>
+                        <p>Jasa Push Member VIP</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>50 MEMBER</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 50 Member" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>100 MEMBER</span>
+                                    <span class="price">Rp 30.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 100 Member" data-price="30000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>150 MEMBER</span>
+                                    <span class="price">Rp 45.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 150 Member" data-price="45000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>200 MEMBER</span>
+                                    <span class="price">Rp 50.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 200 Member" data-price="50000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>250 MEMBER</span>
+                                    <span class="price">Rp 65.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 250 Member" data-price="65000">BELI</button>
+                                                            </li>
+                            <li>
+                                <div>
+                                    <span>300 MEMBER</span>
+                                    <span class="price">Rp 75.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 300 Member" data-price="75000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>350 MEMBER</span>
+                                    <span class="price">Rp 85.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 350 Member" data-price="85000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>400 MEMBER</span>
+                                    <span class="price">Rp 95.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 400 Member" data-price="95000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>450 MEMBER</span>
+                                    <span class="price">Rp 105.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 450 Member" data-price="105000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>500 MEMBER</span>
+                                    <span class="price">Rp 115.000</span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - 500 Member" data-price="115000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>FULL 1024 MEMBER</span>
+                                    <span class="price">Rp 150.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="JPM VIP - FULL 1024 Member" data-price="150000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Sewa Bot Jaga Grup -->
+                <div class="product-card visible" data-category="bot">
+                    <div class="product-header">
+                        <h3>Sewa Bot Jaga Grup</h3>
+                        <p>Bot untuk menjaga grup WhatsApp</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>1 Hari</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot Jaga Grup - 1 Hari" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>3 Hari</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot Jaga Grup - 3 Hari" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>7 Hari</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot Jaga Grup - 7 Hari" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>15 Hari</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot Jaga Grup - 15 Hari" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>1 BULAN</span>
+                                    <span class="price">Rp 20.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot Jaga Grup - 1 Bulan" data-price="20000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>PERMANEN</span>
+                                    <span class="price">Rp 25.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot Jaga Grup - PERMANEN" data-price="25000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Sewa Bot PushKontak -->
+                <div class="product-card visible" data-category="bot">
+                    <div class="product-header">
+                        <h3>Sewa Bot PushKontak</h3>
+                        <p>Bot untuk push kontak</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>1 Hari</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot PushKontak - 1 Hari" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>3 Hari</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot PushKontak - 3 Hari"
+                                   data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>7 Hari</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot PushKontak - 7 Hari" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>15 Hari</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot PushKontak - 15 Hari" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>1 BULAN</span>
+                                    <span class="price">Rp 20.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot PushKontak - 1 Bulan" data-price="20000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Sewa Bot JPM -->
+                <div class="product-card visible" data-category="bot">
+                    <div class="product-header">
+                        <h3>Sewa Bot JPM</h3>
+                        <p>Bot untuk jasa push member</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>1 Hari</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot JPM - 1 Hari" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>3 Hari</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot JPM - 3 Hari" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>7 Hari</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot JPM - 7 Hari" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>15 Hari</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot JPM - 15 Hari" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>1 BULAN</span>
+                                    <span class="price">Rp 20.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Sewa Bot JPM - 1 Bulan" data-price="20000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Jadi Bot WhatsApp -->
+                <div class="product-card visible" data-category="jadi-bot">
+                    <div class="product-header">
+                        <h3>Jadi Bot WhatsApp</h3>
+                        <p>Layanan menjadi bot WhatsApp</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>1 Hari</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Jadi Bot WhatsApp - 1 Hari" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>3 Hari</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Jadi Bot WhatsApp - 3 Hari" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>7 Hari</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Jadi Bot WhatsApp - 7 Hari" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>15 Hari</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Jadi Bot WhatsApp - 15 Hari" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>1 Bulan</span>
+                                    <span class="price">Rp 25.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Jadi Bot WhatsApp - 1 Bulan" data-price="25000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- NOKOS WhatsApp -->
+                <div class="product-card visible" data-category="nokos">
+                                    <div class="product-header">
+                        <h3>NOKOS WhatsApp</h3>
+                        <p>Nomor kosong untuk WhatsApp</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>🇮🇩 +62 INDONESIA</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="NOKOS WhatsApp - Indonesia" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>🇦🇫 +93 AFGANISTAN</span>
+                                    <span class="price">Rp 8.000</span>
+                                </div>
+                                <button class="buy-button" data-product="NOKOS WhatsApp - Afganistan" data-price="8000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>🇵🇭 +63 PHILIPINA</span>
+                                    <span class="price">Rp 8.000</span>
+                                </div>
+                                <button class="buy-button" data-product="NOKOS WhatsApp - Philipina" data-price="8000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>🇻🇪 +58 VENEZUELA</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="NOKOS WhatsApp - Venezuela" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>🇮🇷 +98 IRAN</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="NOKOS WhatsApp - Iran" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>🇺🇸 +1 USA</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="NOKOS WhatsApp - USA" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>🇰🇪 +225 PANTAI GADING</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="NOKOS WhatsApp - Pantai Gading" data-price="15000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Murid Habibih Hosting -->
+                <div class="product-card visible" data-category="murid">
+                    <div class="product-header">
+                        <h3>Murid Habibih Hosting</h3>
+                        <p>Program pembelajaran</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>MURID JPM</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Murid JPM" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>MURID MURBUG</span>
+                                    <span class="price">Rp 25.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Murid Murbug" data-price="25000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>MURID PUSHKONTAK</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Murid PushKontak" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>MURID SUNTIK SOSMED</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Murid Suntik Sosmed" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>MURID BIKIN WEB VERCAL</span>
+                                    <span class="price">Rp 20.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Murid Bikin Web Vercal" data-price="20000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>MURID BIKIN BOT WHATSAPP</span>
+                                    <span class="price">Rp 25.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Murid Bikin Bot WhatsApp" data-price="25000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>MURID NOKOS WHATSAPP</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Murid NOKOS WhatsApp" data-price="10000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hosting Section -->
+    <section id="hosting" style="background-color: #f0f4f8;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Layanan Hosting</h2>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Panel Pterodactyl -->
+                <div class="product-card visible">
+                    <div class="product-header">
+                        <h3>Panel Pterodactyl</h3>
+                        <p>Hosting untuk bot WhatsApp</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>Panel Ram 1Gb</span>
+                                    <span class="price">Rp 1.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Panel Pterodactyl - 1GB" data-price="1000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>Panel Ram 2Gb</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Panel Pterodactyl - 2GB" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>Panel Ram 3Gb</span>
+                                    <span class="price">Rp 3.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Panel Pterodactyl - 3GB" data-price="3000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>Panel Ram 4Gb</span>
+                                    <span class="price">Rp 4.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Panel Pterodactyl - 4GB" data-price="4000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>Panel Ram 5Gb</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Panel Pterodactyl - 5GB" data-price="5000">BELI</button>
+                                                            </li>
+                            <li>
+                                <div>
+                                    <span>Panel Ram Unlimited</span>
+                                    <span class="price">Rp 8.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Panel Pterodactyl - Unlimited" data-price="8000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Bisnis Panel -->
+                <div class="product-card visible">
+                    <div class="product-header">
+                        <h3>Bisnis Panel</h3>
+                        <p>Peluang bisnis panel</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>Reseller Panel</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Bisnis Panel - Reseller" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>Admin Panel (Adp)</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Bisnis Panel - Admin" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>Patner Panel (Pt)</span>
+                                    <span class="price">Rp 20.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Bisnis Panel - Patner" data-price="20000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>Tangan Kanan Panel</span>
+                                    <span class="price">Rp 25.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Bisnis Panel - Tangan Kanan" data-price="25000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>Pengurus Vip Panel</span>
+                                    <span class="price">Rp 35.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Bisnis Panel - Pengurus VIP" data-price="35000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- VPS Digital Ocean -->
+                <div class="product-card visible">
+                    <div class="product-header">
+                        <h3>VPS Digital Ocean</h3>
+                        <p>Virtual Private Server</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>VPS Ram 1 Core 1</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="VPS Digital Ocean - 1 Core 1" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>VPS Ram 2 Core 2</span>
+                                    <span class="price">Rp 20.000</span>
+                                </div>
+                                <button class="buy-button" data-product="VPS Digital Ocean - 2 Core 2" data-price="20000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>VPS Ram 4 Core 2</span>
+                                    <span class="price">Rp 30.000</span>
+                                </div>
+                                <button class="buy-button" data-product="VPS Digital Ocean - 4 Core 2" data-price="30000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>VPS Ram 8 Core 4</span>
+                                    <span class="price">Rp 45.000</span>
+                                </div>
+                                <button class="buy-button" data-product="VPS Digital Ocean - 8 Core 4" data-price="45000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>VPS Ram 16 Core 4</span>
+                                    <span class="price">Rp 70.000</span>
+                                </div>
+                                <button class="buy-button" data-product="VPS Digital Ocean - 16 Core 4" data-price="70000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>VPS Ram 32 Core 8</span>
+                                    <span class="price">Rp 125.000</span>
+                                </div>
+                                <button class="buy-button" data-product="VPS Digital Ocean - 32 Core 8" data-price="125000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Injection Section -->
+    <section id="social">
+        <div class="container">
+            <div class="section-title">
+                <h2>Jasa Suntik Media Sosial</h2>
+            </div>
+            
+            <div class="category-nav">
+                <button class="category-btn active" data-category="all-sosmed">Semua</button>
+                <button class="category-btn" data-category="tiktok">TikTok</button>
+                <button class="category-btn" data-category="instagram">Instagram</button>
+                <button class="category-btn" data-category="whatsapp">WhatsApp</button>
+            </div>
+            
+            <div class="product-grid">
+                <!-- TikTok Likes -->
+                <div class="product-card visible" data-category="tiktok">
+                    <div class="product-header">
+                        <h3>Suntik Like TikTok</h3>
+                        <p>Tingkatkan engagement TikTok</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>1.000 Like</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 1000 Like" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>2.000 Like</span>
+                                    <span class="price">Rp 3.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 2000 Like" data-price="3000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>3.000 Like</span>
+                                    <span class="price">Rp 4.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 3000 Like" data-price="4000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>4.000 Like</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 4000 Like" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>5.000 Like</span>
+                                    <span class="price">Rp 6.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 5000 Like" data-price="6000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>6.000 Like</span>
+                                    <span class="price">Rp 7.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 6000 Like" data-price="7000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>7.000 Like</span>
+                                    <span class="price">Rp 8.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 7000 Like" data-price="8000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>8.000 Like</span>
+                                    <span class="price">Rp 9.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 8000 Like" data-price="9000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>9.000 Like</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 9000 Like" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>10.000 Like</span>
+                                    <span class="price">Rp 12.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like TikTok - 10000 Like" data-price="12000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- TikTok Views -->
+                <div class="product-card visible" data-category="tiktok">
+                    <div class="product-header">
+                        <h3>Suntik Views TikTok</h3>
+                        <p>Tingkatkan views TikTok</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>10.000 Views</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 10000 Views" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>20.000 Views</span>
+                                    <span class="price">Rp 8.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 20000 Views" data-price="8000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>30.000 Views</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 30000 Views" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>40.000 Views</span>
+                                    <span class="price">Rp 12.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 40000 Views" data-price="12000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>50.000 Views</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 50000 Views" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>60.000 Views</span>
+                                    <span class="price">Rp 18.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 60000 Views" data-price="18000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>70.000 Views</span>
+                                    <span class="price">Rp 20.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 70000 Views" data-price="20000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>80.000 Views</span>
+                                    <span class="price">Rp 23.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 80000 Views" data-price="23000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>90.000 Views</span>
+                                    <span class="price">Rp 25.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 90000 Views" data-price="25000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>100.000 Views</span>
+                                    <span class="price">Rp 30.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views TikTok - 100000 Views" data-price="30000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- TikTok Followers -->
+                <div class="product-card visible" data-category="tiktok">
+                    <div class="product-header">
+                        <h3>Suntik Followers TikTok</h3>
+                        <p>Tingkatkan followers TikTok</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>100 Followers</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers TikTok - 100 Followers" data-price="5000">BELI</button>
+                                                            </li>
+                            <li>
+                                <div>
+                                    <span>200 Followers</span>
+                                    <span class="price">Rp 7.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers TikTok - 200 Followers" data-price="7000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>300 Followers</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers TikTok - 300 Followers" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>400 Followers</span>
+                                    <span class="price">Rp 12.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers TikTok - 400 Followers" data-price="12000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>500 Followers</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers TikTok - 500 Followers" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>600 Followers</span>
+                                    <span class="price">Rp 18.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers TikTok - 600 Followers" data-price="18000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>1000 Followers</span>
+                                    <span class="price">Rp 20.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers TikTok - 1000 Followers" data-price="20000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Instagram Likes -->
+                <div class="product-card visible" data-category="instagram">
+                    <div class="product-header">
+                        <h3>Suntik Like Instagram</h3>
+                        <p>Tingkatkan engagement Instagram</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>100 Like</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 100 Like" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>200 Like</span>
+                                    <span class="price">Rp 3.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 200 Like" data-price="3000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>300 Like</span>
+                                    <span class="price">Rp 4.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 300 Like" data-price="4000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>400 Like</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 400 Like" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>500 Like</span>
+                                    <span class="price">Rp 6.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 500 Like" data-price="6000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>600 Like</span>
+                                    <span class="price">Rp 7.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 600 Like" data-price="7000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>700 Like</span>
+                                    <span class="price">Rp 8.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 700 Like" data-price="8000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>800 Like</span>
+                                    <span class="price">Rp 9.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 800 Like" data-price="9000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>1.000 Like</span>
+                                    <span class="price">Rp 10.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Like Instagram - 1000 Like" data-price="10000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Instagram Views -->
+                <div class="product-card visible" data-category="instagram">
+                    <div class="product-header">
+                        <h3>Suntik Views Instagram</h3>
+                        <p>Tingkatkan views Instagram</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>1.000 Views</span>
+                                    <span class="price">Rp 2.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views Instagram - 1000 Views" data-price="2000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>5.000 Views</span>
+                                    <span class="price">Rp 5.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views Instagram - 5000 Views" data-price="5000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>10.000 Views</span>
+                                    <span class="price">Rp 7.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views Instagram - 10000 Views" data-price="7000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>20.000 Views</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views Instagram - 20000 Views" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>30.000 Views</span>
+                                    <span class="price">Rp 12.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views Instagram - 30000 Views" data-price="12000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>40.000 Views</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views Instagram - 40000 Views" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>50.000 Views</span>
+                                    <span class="price">Rp 20.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Views Instagram - 50000 Views" data-price="20000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Instagram Followers -->
+                <div class="product-card visible" data-category="instagram">
+                    <div class="product-header">
+                        <h3>Suntik Followers Instagram</h3>
+                        <p>Tingkatkan followers Instagram</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>100 Followers</span>
+                                    <span class="price">Rp 7.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 100 Followers" data-price="7000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>200 Followers</span>
+                                    <span class="price">Rp 10.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 200 Followers" data-price="10000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>300 Followers</span>
+                                    <span class="price">Rp 15.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 300 Followers" data-price="15000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>400 Followers</span>
+                                    <span class="price">Rp 20.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 400 Followers" data-price="20000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>500 Followers</span>
+                                    <span class="price">Rp 25.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 500 Followers" data-price="25000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>600 Followers</span>
+                                    <span class="price">Rp 30.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 600 Followers" data-price="30000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>700 Followers</span>
+                                    <span class="price">Rp 35.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 700 Followers" data-price="35000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>800 Followers</span>
+                                    <span class="price">Rp 40.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 800 Followers" data-price="40000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>900 Followers</span>
+                                    <span class="price">Rp 45.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 900 Followers" data-price="45000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>1000 Followers</span>
+                                    <span class="price">Rp 50.000 <span class="highlight">⚡</span></span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Followers Instagram - 1000 Followers" data-price="50000">BELI</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- WhatsApp Channel -->
+                <div class="product-card visible" data-category="whatsapp">
+                    <div class="product-header">
+                        <h3>Suntik Saluran WhatsApp</h3>
+                        <p>Tingkatkan followers WhatsApp Channel</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="price-list">
+                            <li>
+                                <div>
+                                    <span>100 Followers</span>
+                                    <span class="price">Rp 7.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 100 Followers" data-price="7000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>200 Followers</span>
+                                    <span class="price">Rp 12.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 200 Followers" data-price="12000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>300 Followers</span>
+                                    <span class="price">Rp 17.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 300 Followers" data-price="17000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>400 Followers</span>
+                                    <span class="price">Rp 20.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 400 Followers" data-price="20000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>500 Followers</span>
+                                    <span class="price">Rp 25.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 500 Followers" data-price="25000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>600 Followers</span>
+                                    <span class="price">Rp 30.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 600 Followers" data-price="30000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>700 Followers</span>
+                                    <span class="price">Rp 35.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 700 Followers" data-price="35000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>800 Followers</span>
+                                    <span class="price">Rp 40.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 800 Followers" data-price="40000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>900 Followers</span>
+                                    <span class="price">Rp 45.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 900 Followers" data-price="45000">BELI</button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span>1000 Followers</span>
+                                    <span class="price">Rp 50.000</span>
+                                </div>
+                                <button class="buy-button" data-product="Suntik Saluran WhatsApp - 1000 Followers" data-price="50000">BELI</button>
+                            </li>
+ 
